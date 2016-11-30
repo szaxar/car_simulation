@@ -6,7 +6,13 @@ public class OptionsParser {
 
 		MoveDirection[] tablica = new MoveDirection[args.length];
 		int i = 0;
+		
+		
+		
+		
 		for (String argument : args) {
+			
+				
 			switch (argument) {
 			case "f":
 				tablica[i] = MoveDirection.Forward;
@@ -28,11 +34,21 @@ public class OptionsParser {
 				break;
 			
 			default:
-				break;
+				throw new IllegalArgumentException("bledne wartosci");
+			
+			}
+			
+			
 
 			}
-		}
+		
 
+		
+		
+		
+		
+		
+		
 		return tablica;
 	}
 }

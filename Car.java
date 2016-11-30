@@ -1,10 +1,14 @@
 package agh.cs.lab2;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Car  {
 
 	private final IWorldMap map;
 
 	private Position position;
+	private Set<IPositionChangeObserver> obserwator =new HashSet<IPositionChangeObserver>();
 
 	public Car(IWorldMap map, int x, int y) {
 		this.map = map;
@@ -37,7 +41,20 @@ public class Car  {
 		return " ";
 
 	}
-
+	public Position getPosition(){
+		return position;
+	}
+	
+	public void addListener(IPositionChangeObserver observer){ obserwator.add(observer);	}
+	
+	public void removeListener(IPositionChangeObserver observer){ obserwator.remove(obserwator);	}
+	
+	public void positionChanged(Position old, Position _new){
+		obserwator.forEach((e)-> e.positionChanged(old, _new)); 
+	}
+	
+	
+	
 	public void move(MoveDirection direction) {
 
 		switch (direction) {
@@ -88,9 +105,8 @@ public class Car  {
 		}
 
 	}
-	public Position getPosition(){
-		return position;
-	}
+
+	
 	
 
 }
